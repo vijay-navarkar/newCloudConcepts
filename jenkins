@@ -4,14 +4,15 @@ pipeline {
 
 	stages{
 	  	stage('build'){
-	    	steps{
+	    	steps{ 
 	    		withMaven(maven : 'maven_3_5_0'){
 	    		sh 'mvn clean package'
-	    	}
+	    	   }
+			}   
 	    }
 	
-	  stage('deploy'){
-	    	step {
+	    stage('deploy'){
+	    	steps {
 	      		 withCredentials([[class : 'UsernamePasswordMultiBinding' ,
 	       		 credentialsId : 'PCF_LOGIN' ,
 	       		 usernameVariable : 'USERNAME' ,
@@ -21,7 +22,7 @@ pipeline {
 	       			sh '/user/local/bin/cf push'
 	       		}
 	    	}
-	  }
+		}
 	
 	}
 
