@@ -1,0 +1,32 @@
+pipeline {
+
+	agent any
+
+	stages{
+	
+	  stage('build'){
+	    steps{
+	    	withMaven(maven : 'maven_3_5_0'){
+	    		sh 'mvn clean package'
+	    	}
+	    }
+	  }
+	
+	  stage('deploy'){
+	    step {
+	       withCredentials([[class : 'UsernamePasswordMultiBinding' ,
+	       credentialsId : 'PCF_LOGIN' ,
+	       usernameVariable : 'USERNAME' ,
+	       passwordVariable : 'PASSWORD'
+	       ]]) {
+	       sh '/user/local/bin/cf login -a https://api.run.pivotal.io -u $USERNAME -p $PASSWORD'
+	       sh '/user/local/bin/cf push'
+	       
+	       }
+	    }
+	  }
+	
+	
+	}
+
+}
