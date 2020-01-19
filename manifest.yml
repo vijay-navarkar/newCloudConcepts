@@ -1,0 +1,11 @@
+applications:
+- name: scan
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  path : target/scan-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: scan.cfapps.io
+  stack: cflinuxfs3
+  buildpacks :
+   - java_buildpack
