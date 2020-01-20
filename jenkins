@@ -5,7 +5,7 @@ pipeline {
 	stages{
 	  	stage('build'){
 	    	steps{ 
-	    		withMaven(maven : 'Jenkis_Maven'){
+	    		withMaven(maven : 'Jenkins_Maven'){
 	    		sh 'mvn clean package'
 	    	   }
 			}   
