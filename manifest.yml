@@ -9,3 +9,6 @@ applications:
   stack: cflinuxfs3
   buildpacks :
    - java_buildpack
+  env:
+    JAVA_OPTS: '-XX:MaxMetaspaceSize=80780K -Xss512k -Xmx200M -XX:ReservedCodeCacheSize=16M -XX:MaxDirectMemorySize=16M'
+  
